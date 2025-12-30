@@ -3,44 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Countdown Timer</title>
+  <title>Countdown</title>
+
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <div class="wrapper">
-    <h1> Countdown ⏳</h1>
+    <h1>⏳ العد التنازلي</h1>
 
     <!-- اختيار الدولة -->
     <div class="select-wrapper">
       <select id="timezoneSelect">
-        <option value="Africa/Cairo">Cairo</option>
-        <option value="Asia/Riyadh">Riyadh</option>
+        <option value="Africa/Cairo">القاهرة</option>
+        <option value="Asia/Riyadh">الرياض</option>
       </select>
     </div>
 
-    <!-- العداد -->
+    <!-- العد التنازلي -->
     <div id="countdown">
       <div class="box">
         <span id="days">00</span>
-        <small>Days</small>
+        <small>أيام</small>
       </div>
 
       <div class="box">
         <span id="hours">00</span>
-        <small>Hours</small>
+        <small>ساعات</small>
       </div>
 
       <div class="box">
         <span id="minutes">00</span>
-        <small>Minutes</small>
+        <small>دقائق</small>
       </div>
 
       <div class="box">
         <span id="seconds">00</span>
-        <small>Seconds</small>
+        <small>ثواني</small>
       </div>
+    </div>
+
+    <!-- تقدم الأيام -->
+    <div class="progress-wrapper">
+      <h2>📅 التقدّم اليومي</h2>
+      <div id="daysProgress" class="days-grid"></div>
     </div>
   </div>
 
