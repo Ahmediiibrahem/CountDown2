@@ -1,5 +1,5 @@
 // ===============================
-// الإعدادات الأساسية
+// Basic Settings
 // ===============================
 const startDate = new Date(2025, 11, 19); // 19 December 2025
 const endDate   = new Date(2026, 2, 16);  // 16 March 2026
@@ -13,32 +13,22 @@ const targetDateParts = {
   second: 0
 };
 
-// عناصر DOM
-const timezoneSelect = document.getElementById("timezoneSelect");
+// DOM Elements
 const daysGrid = document.getElementById("daysProgress");
 const progressFill = document.getElementById("progressFill");
 const progressPercent = document.getElementById("progressPercent");
 
 // ===============================
-// حفظ الدولة المختارة
+// Fixed Timezone: Cairo
 // ===============================
-const savedZone = localStorage.getItem("timezone");
-if (savedZone) timezoneSelect.value = savedZone;
-
-let TARGET_TIMEZONE = timezoneSelect.value;
-
-timezoneSelect.addEventListener("change", () => {
-  TARGET_TIMEZONE = timezoneSelect.value;
-  localStorage.setItem("timezone", TARGET_TIMEZONE);
-  updateDayProgress();
-});
+const TARGET_TIMEZONE = "Africa/Cairo";
 
 // ===============================
-// الوقت حسب الدولة
+// Get Current Time in Cairo
 // ===============================
-function getNowInTimeZone(timeZone) {
+function getNowInTimeZone() {
   const formatter = new Intl.DateTimeFormat("en-US", {
-    timeZone,
+    timeZone: TARGET_TIMEZONE,
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -57,7 +47,7 @@ function getNowInTimeZone(timeZone) {
 }
 
 // ===============================
-// تاريخ الهدف
+// Target Date
 // ===============================
 function getTargetDate() {
   return new Date(
@@ -66,10 +56,10 @@ function getTargetDate() {
 }
 
 // ===============================
-// العد التنازلي العلوي
+// Countdown Timer
 // ===============================
 setInterval(() => {
-  const now = getNowInTimeZone(TARGET_TIMEZONE);
+  const now = getNowInTimeZone();
   const target = getTargetDate();
   const diff = target - now;
 
@@ -89,7 +79,7 @@ setInterval(() => {
 }, 1000);
 
 // ===============================
-// إنشاء مربعات الأيام حسب الشهور
+// Generate Day Boxes by Month
 // ===============================
 function generateDayBoxes() {
   daysGrid.innerHTML = "";
@@ -114,7 +104,7 @@ function generateDayBoxes() {
     const monthBlock = document.createElement("div");
     monthBlock.className = "month-block";
 
-    // عنوان الشهر بالإنجليزي
+    // Month title in English
     const title = document.createElement("div");
     title.className = "month-title";
     title.textContent = days[0].toLocaleDateString("en-US", {
@@ -125,7 +115,7 @@ function generateDayBoxes() {
     const grid = document.createElement("div");
     grid.className = "month-days";
 
-    // إضافة الأيام
+    // Add day boxes
     days.forEach(date => {
       const box = document.createElement("div");
       box.className = "day-box";
@@ -141,10 +131,10 @@ function generateDayBoxes() {
 }
 
 // ===============================
-// تحديث حالة الأيام + progress
+// Update Day Status + Progress
 // ===============================
 function updateDayProgress() {
-  const now = getNowInTimeZone(TARGET_TIMEZONE);
+  const now = getNowInTimeZone();
 
   const allBoxes = document.querySelectorAll(".day-box");
   let doneCount = 0;
@@ -172,7 +162,7 @@ function updateDayProgress() {
 }
 
 // ===============================
-// تشغيل أولي
+// Initial Run
 // ===============================
 generateDayBoxes();
 updateDayProgress();
