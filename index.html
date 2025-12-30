@@ -1,63 +1,47 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Countdown</title>
-
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Target Date</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <div class="wrapper">
-    <h1>Countdown ⏳</h1>
+    <h1>Countdown</h1>
 
-    <!-- اختيار الدولة -->
-    <div class="select-wrapper">
-      <select id="timezoneSelect">
-        <option value="Africa/Cairo">Cairo</option>
-        <option value="Asia/Riyadh">Riyadh</option>
-      </select>
-    </div>
-
-    <!-- العد التنازلي -->
     <div id="countdown">
       <div class="box">
-        <span id="days">00</span>
+        <span id="days">0</span>
         <small>Days</small>
       </div>
       <div class="box">
-        <span id="hours">00</span>
+        <span id="hours">0</span>
         <small>Hours</small>
       </div>
       <div class="box">
-        <span id="minutes">00</span>
+        <span id="minutes">0</span>
         <small>Minutes</small>
       </div>
       <div class="box">
-        <span id="seconds">00</span>
+        <span id="seconds">0</span>
         <small>Seconds</small>
       </div>
     </div>
 
-    <!-- شبكة الأيام -->
-    <div class="progress-wrapper">
-      <h2>Daily Progress 📅</h2>
-      <div id="daysProgress" class="months-wrapper"></div>
-    </div>
+    <div id="daysProgress"></div>
 
-    <!-- شريط التقدم -->
     <div class="progress-bar-wrapper">
       <div class="progress-info">
-        <span>Progress %</span>
+        <span>Progress</span>
         <span id="progressPercent">0%</span>
       </div>
       <div class="progress-bar">
         <div id="progressFill"></div>
       </div>
     </div>
-
   </div>
 
   <script src="script.js"></script>
