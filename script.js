@@ -1,8 +1,8 @@
 // ===============================
 // الإعدادات الأساسية
 // ===============================
-const startDate = new Date(2025, 11, 19); // 19 ديسمبر 2025
-const endDate   = new Date(2026, 2, 16);  // 16 مارس 2026
+const startDate = new Date(2025, 11, 19); // 19 December 2025
+const endDate   = new Date(2026, 2, 16);  // 16 March 2026
 
 const targetDateParts = {
   year: 2026,
@@ -20,7 +20,7 @@ const progressFill = document.getElementById("progressFill");
 const progressPercent = document.getElementById("progressPercent");
 
 // ===============================
-// حفظ واختيار الدولة
+// حفظ الدولة المختارة
 // ===============================
 const savedZone = localStorage.getItem("timezone");
 if (savedZone) timezoneSelect.value = savedZone;
@@ -89,7 +89,7 @@ setInterval(() => {
 }, 1000);
 
 // ===============================
-// إنشاء الأيام مقسمة حسب الشهور
+// إنشاء مربعات الأيام حسب الشهور
 // ===============================
 function generateDayBoxes() {
   daysGrid.innerHTML = "";
@@ -101,9 +101,7 @@ function generateDayBoxes() {
     d <= endDate;
     d.setDate(d.getDate() + 1)
   ) {
-    const year = d.getFullYear();
-    const month = d.getMonth();
-    const key = `${year}-${month}`;
+    const key = `${d.getFullYear()}-${d.getMonth()}`;
 
     if (!monthGroups[key]) {
       monthGroups[key] = [];
@@ -112,15 +110,13 @@ function generateDayBoxes() {
     monthGroups[key].push(new Date(d));
   }
 
-  Object.entries(monthGroups).forEach(([key, days]) => {
-    const monthIndex = days[0].getMonth() + 1;
-
+  Object.values(monthGroups).forEach(days => {
     const monthBlock = document.createElement("div");
-    monthBlock.className = `month-block month-${monthIndex}`;
+    monthBlock.className = "month-block";
 
     const title = document.createElement("div");
     title.className = "month-title";
-    title.textContent = days[0].toLocaleDateString("ar-EG", {
+    title.textContent = days[0].toLocaleDateString("en-US", {
       month: "long",
       year: "numeric"
     });
@@ -143,7 +139,7 @@ function generateDayBoxes() {
 }
 
 // ===============================
-// تحديث حالة الأيام + شريط التقدم
+// تحديث حالة الأيام + progress
 // ===============================
 function updateDayProgress() {
   const now = getNowInTimeZone(TARGET_TIMEZONE);
@@ -174,7 +170,7 @@ function updateDayProgress() {
 }
 
 // ===============================
-// تشغيل
+// تشغيل أولي
 // ===============================
 generateDayBoxes();
 updateDayProgress();
