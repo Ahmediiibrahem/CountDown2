@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Cairo", Tahoma, sans-serif;
+  font-family: "Segoe UI", Tahoma, sans-serif;
 }
 
 body {
@@ -58,6 +58,7 @@ select option {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+  margin-bottom: 30px;
 }
 
 .box {
@@ -77,61 +78,62 @@ select option {
   opacity: 0.9;
 }
 
-/* progress grid */
-.progress-wrapper {
-  margin-top: 40px;
+/* ===== تقسيم الشهور ===== */
+.month-block {
+  margin-bottom: 25px;
 }
 
-.progress-wrapper h2 {
-  margin-bottom: 15px;
-  font-size: 20px;
+.month-title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.9;
 }
 
-.days-grid {
+/* شبكة أيام الشهر */
+.month-days {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(26px, 1fr));
+  grid-template-columns: repeat(7, 1fr); /* 7 أعمدة ثابتة */
   gap: 8px;
-  max-width: 600px;
+  max-width: 420px;
   margin: 0 auto;
 }
 
+/* مربع اليوم */
 .day-box {
   aspect-ratio: 1 / 1;
-  border-radius: 6px;
-  font-size: 11px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
   position: relative;
+  transition: 0.2s ease;
 }
 
-/* أيام منتهية */
-/* اليوم اللي خلص */
+/* الأيام المنتهية */
+.day-box.done {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* علامة ✔ */
 .day-box.done::after {
   content: "✓";
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.6);
+  bottom: 4px;
+  right: 6px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
 }
 
-
+/* اليوم الحالي */
 .day-box.today {
-  outline: 2px solid #fff;
+  outline: 2px solid white;
 }
-
-/* ألوان الشهور */
-.month-12 { background: #5c6bc0; } /* ديسمبر */
-.month-1  { background: #26a69a; } /* يناير */
-.month-2  { background: #42a5f5; } /* فبراير */
-.month-3  { background: #ab47bc; } /* مارس */
 
 /* progress bar */
 .progress-bar-wrapper {
@@ -165,66 +167,8 @@ select option {
   #countdown {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .month-days {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
-
-/* ===== تقسيم الشهور ===== */
-
-/* ===== تقسيم الشهور بشكل نظيف ===== */
-
-.month-block {
-  margin-bottom: 25px;
-}
-
-.month-title {
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  opacity: 0.9;
-}
-
-/* شبكة الأيام */
-.month-days {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
-  gap: 8px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* مربع اليوم */
-.day-box {
-  aspect-ratio: 1 / 1;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-  position: relative;
-}
-
-/* علامة اليوم اللي خلص */
-.day-box.done::after {
-  content: "✓";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* اليوم الحالي */
-.day-box.today {
-  outline: 2px solid #fff;
-}
-
-/* ألوان الشهور */
-.month-12 .day-box { background: rgba(92, 107, 192, 0.45); }
-.month-1  .day-box { background: rgba(38, 166, 154, 0.45); }
-.month-2  .day-box { background: rgba(66, 165, 245, 0.45); }
-.month-3  .day-box { background: rgba(171, 71, 188, 0.45); }
