@@ -1,4 +1,4 @@
-// التاريخ المستهدف (ثابت)
+// التاريخ المستهدف
 const targetDateParts = {
   year: 2026,
   month: 3,
@@ -61,13 +61,10 @@ const countdown = setInterval(() => {
 
   document.getElementById("days").textContent =
     Math.floor(diff / (1000 * 60 * 60 * 24));
-
   document.getElementById("hours").textContent =
     Math.floor((diff / (1000 * 60 * 60)) % 24);
-
   document.getElementById("minutes").textContent =
     Math.floor((diff / (1000 * 60)) % 60);
-
   document.getElementById("seconds").textContent =
     Math.floor((diff / 1000) % 60);
 
