@@ -1,5 +1,5 @@
 // ===============================
-// الإعدادات
+// الإعدادات الأساسية
 // ===============================
 const startDate = new Date(2025, 11, 19); // 19 ديسمبر 2025
 const endDate   = new Date(2026, 2, 16);  // 16 مارس 2026
@@ -13,14 +13,14 @@ const targetDateParts = {
   second: 0
 };
 
-// عناصر
+// عناصر DOM
 const timezoneSelect = document.getElementById("timezoneSelect");
 const daysGrid = document.getElementById("daysProgress");
 const progressFill = document.getElementById("progressFill");
 const progressPercent = document.getElementById("progressPercent");
 
 // ===============================
-// حفظ الدولة
+// حفظ واختيار الدولة
 // ===============================
 const savedZone = localStorage.getItem("timezone");
 if (savedZone) timezoneSelect.value = savedZone;
@@ -34,7 +34,7 @@ timezoneSelect.addEventListener("change", () => {
 });
 
 // ===============================
-// وقت حسب الدولة
+// الوقت حسب الدولة
 // ===============================
 function getNowInTimeZone(timeZone) {
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -51,11 +51,13 @@ function getNowInTimeZone(timeZone) {
   const parts = formatter.formatToParts(new Date());
   const v = Object.fromEntries(parts.map(p => [p.type, p.value]));
 
-  return new Date(`${v.year}-${v.month}-${v.day}T${v.hour}:${v.minute}:${v.second}`);
+  return new Date(
+    `${v.year}-${v.month}-${v.day}T${v.hour}:${v.minute}:${v.second}`
+  );
 }
 
 // ===============================
-// العد التنازلي العلوي
+// تاريخ الهدف
 // ===============================
 function getTargetDate() {
   return new Date(
@@ -63,6 +65,9 @@ function getTargetDate() {
   );
 }
 
+// ===============================
+// العد التنازلي العلوي
+// ===============================
 setInterval(() => {
   const now = getNowInTimeZone(TARGET_TIMEZONE);
   const target = getTargetDate();
@@ -72,62 +77,105 @@ setInterval(() => {
 
   document.getElementById("days").textContent =
     Math.floor(diff / (1000 * 60 * 60 * 24));
+
   document.getElementById("hours").textContent =
     Math.floor((diff / (1000 * 60 * 60)) % 24);
+
   document.getElementById("minutes").textContent =
     Math.floor((diff / (1000 * 60)) % 60);
+
   document.getElementById("seconds").textContent =
     Math.floor((diff / 1000) % 60);
 }, 1000);
 
 // ===============================
-// إنشاء مربعات الأيام
+// إنشاء الأيام مقسمة حسب الشهور
 // ===============================
 function generateDayBoxes() {
   daysGrid.innerHTML = "";
 
-  const totalDays =
-    Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+  const monthGroups = {};
 
-  for (let i = 0; i < totalDays; i++) {
-    const date = new Date(startDate);
-    date.setDate(startDate.getDate() + i);
+  for (
+    let d = new Date(startDate);
+    d <= endDate;
+    d.setDate(d.getDate() + 1)
+  ) {
+    const year = d.getFullYear();
+    const month = d.getMonth();
+    const key = `${year}-${month}`;
 
-    const box = document.createElement("div");
-    box.className = `day-box month-${date.getMonth() + 1}`;
-    box.textContent = date.getDate(); // رقم اليوم
+    if (!monthGroups[key]) {
+      monthGroups[key] = [];
+    }
 
-    daysGrid.appendChild(box);
+    monthGroups[key].push(new Date(d));
   }
+
+  Object.entries(monthGroups).forEach(([key, days]) => {
+    const monthIndex = days[0].getMonth() + 1;
+
+    const monthBlock = document.createElement("div");
+    monthBlock.className = `month-block month-${monthIndex}`;
+
+    const title = document.createElement("div");
+    title.className = "month-title";
+    title.textContent = days[0].toLocaleDateString("ar-EG", {
+      month: "long",
+      year: "numeric"
+    });
+
+    const grid = document.createElement("div");
+    grid.className = "month-days";
+
+    days.forEach(date => {
+      const box = document.createElement("div");
+      box.className = "day-box";
+      box.textContent = date.getDate();
+      box.dataset.date = date.toISOString();
+      grid.appendChild(box);
+    });
+
+    monthBlock.appendChild(title);
+    monthBlock.appendChild(grid);
+    daysGrid.appendChild(monthBlock);
+  });
 }
 
 // ===============================
-// تحديث التقدم
+// تحديث حالة الأيام + شريط التقدم
 // ===============================
 function updateDayProgress() {
   const now = getNowInTimeZone(TARGET_TIMEZONE);
-  const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
-  const boxes = document.querySelectorAll(".day-box");
-  const total = boxes.length;
+  const allBoxes = document.querySelectorAll(".day-box");
+  let doneCount = 0;
 
-  boxes.forEach((box, index) => {
+  allBoxes.forEach(box => {
+    const dayDate = new Date(box.dataset.date);
+
     box.classList.remove("done", "today");
 
-    if (index < diffDays) box.classList.add("done");
-    if (index === diffDays) box.classList.add("today");
+    if (dayDate < now) {
+      box.classList.add("done");
+      doneCount++;
+    }
+
+    if (dayDate.toDateString() === now.toDateString()) {
+      box.classList.add("today");
+    }
   });
 
-  const percent = Math.min(
-    100,
-    Math.max(0, Math.round((diffDays / total) * 100))
-  );
+  const total = allBoxes.length;
+  const percent = Math.round((doneCount / total) * 100);
 
   progressFill.style.width = percent + "%";
   progressPercent.textContent = percent + "%";
 }
 
+// ===============================
 // تشغيل
+// ===============================
 generateDayBoxes();
 updateDayProgress();
 setInterval(updateDayProgress, 60000);
