@@ -1,8 +1,47 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Cairo", Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1d2671, #c33764);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  margin-bottom: 25px;
+  font-size: clamp(22px, 5vw, 32px);
+}
+
+/* Dropdown */
+.select-wrapper {
+  margin-bottom: 25px;
+}
+
 select {
   width: 100%;
   max-width: 250px;
-  margin: 0 auto 25px;
-  display: block;
   padding: 10px 14px;
   border-radius: 12px;
   border: none;
@@ -11,8 +50,45 @@ select {
   color: white;
   outline: none;
   backdrop-filter: blur(10px);
+  cursor: pointer;
 }
 
 select option {
   color: black;
+}
+
+/* العداد */
+#countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.box {
+  padding: 20px 10px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.box span {
+  display: block;
+  font-size: clamp(28px, 8vw, 46px);
+  font-weight: bold;
+}
+
+.box small {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* موبايل */
+@media (max-width: 480px) {
+  #countdown {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wrapper {
+    padding: 25px 15px;
+  }
 }
