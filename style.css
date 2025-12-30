@@ -166,3 +166,63 @@ select option {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ===== تقسيم الشهور ===== */
+
+.month-block {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.month-title {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+/* شبكة الأيام داخل كل شهر */
+.month-days {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(26px, 1fr));
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* مربعات الأيام */
+.day-box {
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+/* علامة اليوم المنتهي */
+.day-box.done::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* اليوم الحالي */
+.day-box.today {
+  outline: 2px solid #fff;
+}
+
+/* ألوان الشهور */
+.month-12 .day-box { background: rgba(92, 107, 192, 0.45); }
+.month-1  .day-box { background: rgba(38, 166, 154, 0.45); }
+.month-2  .day-box { background: rgba(66, 165, 245, 0.45); }
+.month-3  .day-box { background: rgba(171, 71, 188, 0.45); }
