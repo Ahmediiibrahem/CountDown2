@@ -169,42 +169,44 @@ select option {
 
 /* ===== تقسيم الشهور ===== */
 
+/* ===== تقسيم الشهور بشكل نظيف ===== */
+
 .month-block {
   margin-bottom: 25px;
-  text-align: center;
 }
 
 .month-title {
+  text-align: center;
   margin-bottom: 10px;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
   opacity: 0.9;
 }
 
-/* شبكة الأيام داخل كل شهر */
+/* شبكة الأيام */
 .month-days {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(26px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
   gap: 8px;
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* مربعات الأيام */
+/* مربع اليوم */
 .day-box {
   aspect-ratio: 1 / 1;
-  border-radius: 6px;
-  font-size: 11px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
   font-weight: bold;
   color: white;
-  background: rgba(255, 255, 255, 0.2);
   position: relative;
 }
 
-/* علامة اليوم المنتهي */
+/* علامة اليوم اللي خلص */
 .day-box.done::after {
   content: "✓";
   position: absolute;
