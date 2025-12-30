@@ -114,6 +114,7 @@ function generateDayBoxes() {
     const monthBlock = document.createElement("div");
     monthBlock.className = "month-block";
 
+    // عنوان الشهر بالإنجليزي
     const title = document.createElement("div");
     title.className = "month-title";
     title.textContent = days[0].toLocaleDateString("en-US", {
@@ -124,6 +125,7 @@ function generateDayBoxes() {
     const grid = document.createElement("div");
     grid.className = "month-days";
 
+    // إضافة الأيام
     days.forEach(date => {
       const box = document.createElement("div");
       box.className = "day-box";
