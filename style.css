@@ -17,15 +17,12 @@ body {
 
 .wrapper {
   width: 100%;
-  max-width: 600px;
+  max-width: 650px;
   text-align: center;
   padding: 30px 20px;
   border-radius: 20px;
-
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -34,14 +31,14 @@ h1 {
   font-size: clamp(22px, 5vw, 32px);
 }
 
-/* Dropdown */
+/* select */
 .select-wrapper {
   margin-bottom: 25px;
 }
 
 select {
   width: 100%;
-  max-width: 250px;
+  max-width: 260px;
   padding: 10px 14px;
   border-radius: 12px;
   border: none;
@@ -49,7 +46,6 @@ select {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   outline: none;
-  backdrop-filter: blur(10px);
   cursor: pointer;
 }
 
@@ -57,7 +53,7 @@ select option {
   color: black;
 }
 
-/* العداد */
+/* countdown */
 #countdown {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -68,7 +64,6 @@ select option {
   padding: 20px 10px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
 }
 
 .box span {
@@ -82,13 +77,54 @@ select option {
   opacity: 0.9;
 }
 
-/* موبايل */
+/* progress */
+.progress-wrapper {
+  margin-top: 40px;
+}
+
+.progress-wrapper h2 {
+  margin-bottom: 15px;
+  font-size: clamp(18px, 4vw, 22px);
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(26px, 1fr));
+  gap: 8px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.day-box {
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.day-box.done {
+  background: linear-gradient(135deg, #00c853, #64dd17);
+}
+
+.day-box.done::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-box.today {
+  outline: 2px solid #fff;
+}
+
+/* mobile */
 @media (max-width: 480px) {
   #countdown {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .wrapper {
-    padding: 25px 15px;
   }
 }
