@@ -11,13 +11,13 @@
 <body>
 
   <div class="wrapper">
-    <h1>⏳ العد التنازلي</h1>
+    <h1>Countdown ⏳</h1>
 
     <!-- اختيار الدولة -->
     <div class="select-wrapper">
       <select id="timezoneSelect">
-        <option value="Africa/Cairo">القاهرة</option>
-        <option value="Asia/Riyadh">الرياض</option>
+        <option value="Africa/Cairo">Cairo</option>
+        <option value="Asia/Riyadh">Riyadh</option>
       </select>
     </div>
 
@@ -25,30 +25,39 @@
     <div id="countdown">
       <div class="box">
         <span id="days">00</span>
-        <small>أيام</small>
+        <small>Days</small>
       </div>
-
       <div class="box">
         <span id="hours">00</span>
-        <small>ساعات</small>
+        <small>Hours</small>
       </div>
-
       <div class="box">
         <span id="minutes">00</span>
-        <small>دقائق</small>
+        <small>Minutes</small>
       </div>
-
       <div class="box">
         <span id="seconds">00</span>
-        <small>ثواني</small>
+        <small>Seconds</small>
       </div>
     </div>
 
-    <!-- تقدم الأيام -->
+    <!-- شبكة الأيام -->
     <div class="progress-wrapper">
-      <h2>📅 التقدّم اليومي</h2>
+      <h2>Daily Progress 📅</h2>
       <div id="daysProgress" class="days-grid"></div>
     </div>
+
+    <!-- شريط التقدم -->
+    <div class="progress-bar-wrapper">
+      <div class="progress-info">
+        <span>Progress %</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progressFill"></div>
+      </div>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
