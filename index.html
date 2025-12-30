@@ -1,39 +1,31 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Countdown Timer</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<div class="wrapper">
+  <h1>⏳ العد التنازلي</h1>
 
-  <div class="wrapper">
-    <h1>⏳ العد التنازلي</h1>
+  <!-- اختيار الدولة -->
+  <select id="timezoneSelect">
+    <option value="Africa/Cairo">القاهرة</option>
+    <option value="Asia/Riyadh">الرياض</option>
+  </select>
 
-    <div id="countdown">
-      <div class="box">
-        <span id="days">00</span>
-        <small>أيام</small>
-      </div>
+  <div id="countdown">
+    <div class="box">
+      <span id="days">00</span>
+      <small>أيام</small>
+    </div>
 
-      <div class="box">
-        <span id="hours">00</span>
-        <small>ساعات</small>
-      </div>
+    <div class="box">
+      <span id="hours">00</span>
+      <small>ساعات</small>
+    </div>
 
-      <div class="box">
-        <span id="minutes">00</span>
-        <small>دقائق</small>
-      </div>
+    <div class="box">
+      <span id="minutes">00</span>
+      <small>دقائق</small>
+    </div>
 
-      <div class="box">
-        <span id="seconds">00</span>
-        <small>ثواني</small>
-      </div>
+    <div class="box">
+      <span id="seconds">00</span>
+      <small>ثواني</small>
     </div>
   </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</div>
