@@ -1,8 +1,9 @@
+/* General Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-family: 'Cairo', sans-serif;
 }
 
 body {
@@ -31,29 +32,7 @@ h1 {
   font-size: clamp(22px, 5vw, 32px);
 }
 
-/* select */
-.select-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
-select {
-  width: 220px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: none;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.25);
-  color: white;
-  cursor: pointer;
-}
-
-select option {
-  color: black;
-}
-
-/* countdown */
+/* Countdown */
 #countdown {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -78,7 +57,7 @@ select option {
   opacity: 0.9;
 }
 
-/* ===== تقسيم الشهور ===== */
+/* Month and Days Grid */
 .month-block {
   margin-bottom: 25px;
 }
@@ -91,16 +70,14 @@ select option {
   opacity: 0.9;
 }
 
-/* شبكة أيام الشهر */
 .month-days {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 أعمدة ثابتة */
+  grid-template-columns: repeat(7, 1fr);
   gap: 8px;
   max-width: 420px;
   margin: 0 auto;
 }
 
-/* مربع اليوم */
 .day-box {
   aspect-ratio: 1 / 1;
   border-radius: 8px;
@@ -115,27 +92,26 @@ select option {
   transition: 0.2s ease;
 }
 
-/* الأيام المنتهية */
+/* Days Finished */
 .day-box.done {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* علامة ✔ */
 .day-box.done::after {
   content: "✓";
   position: absolute;
   bottom: 4px;
   right: 6px;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0,0,0,0.5);
 }
 
-/* اليوم الحالي */
+/* Today Highlight */
 .day-box.today {
   outline: 2px solid white;
 }
 
-/* progress bar */
+/* Progress Bar */
 .progress-bar-wrapper {
   margin-top: 30px;
 }
@@ -162,12 +138,11 @@ select option {
   transition: width 0.4s ease;
 }
 
-/* mobile */
+/* Mobile */
 @media (max-width: 480px) {
   #countdown {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .month-days {
     grid-template-columns: repeat(4, 1fr);
   }
