@@ -1,4 +1,6 @@
-// التاريخ المستهدف
+// ======================
+// إعداد التوقيت
+// ======================
 const targetDateParts = {
   year: 2026,
   month: 3,
@@ -8,18 +10,19 @@ const targetDateParts = {
   second: 0
 };
 
-// العناصر
-const timezoneSelect = document.getElementById("timezoneSelect");
+const startDate = new Date(2025, 11, 19); // 19 ديسمبر 2025
+const endDate = new Date(2026, 2, 16);    // 16 مارس 2026
 
-// القيمة الافتراضية
+const timezoneSelect = document.getElementById("timezoneSelect");
 let TARGET_TIMEZONE = timezoneSelect.value;
 
-// تحديث المنطقة عند التغيير
+// تغيير الدولة
 timezoneSelect.addEventListener("change", () => {
   TARGET_TIMEZONE = timezoneSelect.value;
+  updateDayProgress();
 });
 
-// جلب الوقت الحالي حسب الدولة
+// الوقت الحالي حسب الدولة
 function getNowInTimeZone(timeZone) {
   const formatter = new Intl.DateTimeFormat("en-US", {
     timeZone,
@@ -40,22 +43,21 @@ function getNowInTimeZone(timeZone) {
   );
 }
 
-// التاريخ المستهدف
+// التاريخ النهائي
 function getTargetDate() {
   return new Date(
     `${targetDateParts.year}-${String(targetDateParts.month).padStart(2, "0")}-${String(targetDateParts.day).padStart(2, "0")}T${String(targetDateParts.hour).padStart(2, "0")}:${String(targetDateParts.minute).padStart(2, "0")}:${String(targetDateParts.second).padStart(2, "0")}`
   );
 }
 
-// العد التنازلي
-const countdown = setInterval(() => {
+// العد التنازلي الرئيسي
+setInterval(() => {
   const now = getNowInTimeZone(TARGET_TIMEZONE);
   const target = getTargetDate();
   const diff = target - now;
 
   if (diff <= 0) {
-    document.getElementById("countdown").innerHTML =
-      "🎉 انتهى العد التنازلي!";
+    document.getElementById("countdown").innerHTML = "🎉 انتهى العد التنازلي!";
     return;
   }
 
@@ -67,5 +69,42 @@ const countdown = setInterval(() => {
     Math.floor((diff / (1000 * 60)) % 60);
   document.getElementById("seconds").textContent =
     Math.floor((diff / 1000) % 60);
-
 }, 1000);
+
+// ======================
+// مربعات الأيام
+// ======================
+const daysGrid = document.getElementById("daysProgress");
+
+function generateDayBoxes() {
+  daysGrid.innerHTML = "";
+
+  const totalDays =
+    Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+
+  for (let i = 0; i < totalDays; i++) {
+    const box = document.createElement("div");
+    box.className = "day-box";
+    daysGrid.appendChild(box);
+  }
+}
+
+function updateDayProgress() {
+  const now = getNowInTimeZone(TARGET_TIMEZONE);
+  const passedDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+
+  const boxes = document.querySelectorAll(".day-box");
+
+  boxes.forEach((box, index) => {
+    box.classList.remove("done", "today");
+
+    if (index < passedDays) box.classList.add("done");
+    if (index === passedDays) box.classList.add("today");
+  });
+}
+
+generateDayBoxes();
+updateDayProgress();
+
+// تحديث كل دقيقة
+setInterval(updateDayProgress, 60000);
