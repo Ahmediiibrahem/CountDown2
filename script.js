@@ -8,8 +8,8 @@ const targetDateParts = {
   year: 2026,
   month: 3,
   day: 16,
-  hour: 12,
-  minute: 0,
+  hour: 11,
+  minute: 20,
   second: 0
 };
 
